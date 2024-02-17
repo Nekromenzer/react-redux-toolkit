@@ -6,12 +6,27 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_USER_DATA':
+    case 'SET_USER_NAME':
       return {
         ...state,
-        name: action.payload.name,
-        email: action.payload.email,
-        age: action.payload.age
+        name: action.payload
+      }
+    case 'SET_USER_EMAIL':
+      return {
+        ...state,
+        email: action.payload
+      }
+    case 'SET_USER_AGE':
+      return {
+        ...state,
+        age: action.payload
+      }
+    case 'CLEAR_USER_DATA':
+      return {
+        ...state,
+        name: '',
+        email: '',
+        age: 0
       }
     default:
       return state

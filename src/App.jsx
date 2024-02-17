@@ -1,40 +1,89 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { setUserData } from './store/userData/constant'
-
-import './App.css'
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearUserData,
+  setUserAge,
+  setUserEmail,
+  setUserName,
+} from "./store/userData/constant";
+import "./App.css";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const userData = useSelector(
-    (state) => state.userData
-  )
+  const userData = useSelector((state) => state.userData);
+  const { name, email, age } = userData;
 
-  const { name, email, age } = userData
-
-  const handleSubmit = () => {
+  const handleClear = () => {
     const payload = {
-      name: 'Johnny since',
-      email: 'jonny@gmail.com',
-      age: 25   
-    }
+      name: "",
+      email: "",
+      age: 0,
+    };
+    dispatch({
+      type: clearUserData,
+      payload: payload,
+    });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    const getType = {
+      name: setUserName,
+      email: setUserEmail,
+      age: setUserAge,
+    };
 
     dispatch({
-      type: setUserData,
-      payload: payload
-    })
-  }
+      type: getType[name],
+      payload: value,
+    });
+  };
 
   return (
     <>
-    <div>
-      {name} {email} {age!== 0 && age}
-    </div>
-      <button onClick={()=> handleSubmit('Johnny since')}>
-        set user data
-      </button>
+      <div
+        style={{
+          marginBottom: "10px",
+          fontSize: "20px",
+        }}
+      >
+        {name} {email} {age !== 0 && age}
+      </div>
+
+      <input
+        type="text"
+        placeholder="john"
+        name="name"
+        value={name}
+        onChange={(e) => {
+          handleChange(e);
+        }}
+      />
+      <br />
+      <input
+        type="text"
+        placeholder="john@gmail.com"
+        name="email"
+        value={email}
+        onChange={(e) => {
+          handleChange(e);
+        }}
+      />
+      <br />
+      <input
+        type="number"
+        placeholder="23"
+        name="age"
+        value={age === 0 ? "" : age}
+        onChange={(e) => {
+          handleChange(e);
+        }}
+      />
+      <br />
+      <button onClick={() => handleClear()}>clear form</button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
