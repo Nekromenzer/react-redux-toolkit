@@ -75,7 +75,7 @@ function App() {
         type="number"
         placeholder="23"
         name="age"
-        value={age === 0 ? "" : age}
+        value={age}
         onChange={(e) => {
           handleChange(e);
         }}
