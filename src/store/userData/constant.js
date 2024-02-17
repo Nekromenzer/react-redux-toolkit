@@ -1,0 +1,1 @@
+export const setUserData = 'SET_USER_DATA'
