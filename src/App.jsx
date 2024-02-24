@@ -14,14 +14,8 @@ function App() {
   const { name, email, age } = userData;
 
   const handleClear = () => {
-    const payload = {
-      name: "",
-      email: "",
-      age: 0,
-    };
     dispatch({
       type: clearUserData,
-      payload: payload,
     });
   };
 
